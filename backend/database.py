@@ -11,11 +11,18 @@ DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
 
+if not all([DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME]):
+    raise ValueError("Uma ou mais variáveis de ambiente não foram carregadas corretamente.")
+
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-ENGINE = create_engine(DATABASE_URL)
+ENGINE = create_engine(DATABASE_URL, echo=False)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=ENGINE)
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=ENGINE
+)
 
 def get_db():
     db = SessionLocal()
