@@ -16,7 +16,7 @@ app.add_middleware(
 @app.get("/api/next-race")
 def get_next_race(db: Session = Depends(get_db)):
     query = text("""
-        SELECT nome_gp, circuito, data_corrida, hora_corrida 
+        SELECT nome_gp, circuito, data_corrida, horario 
         FROM calendario_f1 
         WHERE data_corrida >= CURRENT_DATE 
         ORDER BY data_corrida ASC 

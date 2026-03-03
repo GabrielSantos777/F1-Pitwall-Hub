@@ -16,12 +16,12 @@ if not all([DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME]):
 
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-ENGINE = create_engine(DATABASE_URL, echo=False)
+engine = create_engine(DATABASE_URL, echo=False)
 
 SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
-    bind=ENGINE
+    bind=engine
 )
 
 def get_db():
